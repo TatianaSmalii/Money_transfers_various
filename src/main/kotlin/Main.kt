@@ -1,10 +1,11 @@
 import java.util.Scanner
 
 fun main() {
-    println(comission("VK Pay", 100_000,0))
+    println(comission("VK Pay", 100_000, 0))
 
 }
-fun comission(typeCard: String, transfer: Int, previos: Int):Int{
+
+fun comission(typeCard: String, transfer: Int, previos: Int): Int {
     return when (typeCard) {
         "MasterCard" -> {
             when {
@@ -18,6 +19,7 @@ fun comission(typeCard: String, transfer: Int, previos: Int):Int{
                 //для округления до целого (.tоInt)
             }
         }
+
         "Maestro" -> {
             when {
                 transfer > 150_000 || transfer + previos > 600_000 -> -1
@@ -25,26 +27,30 @@ fun comission(typeCard: String, transfer: Int, previos: Int):Int{
                 else -> (transfer * 0.006f).toInt() + 20
             }
         }
+
         "Visa" -> {
-            when{
+            when {
                 transfer > 150_000 || transfer + previos > 600_000 -> -1
-                transfer in 35 .. 150_000 -> (transfer * 0.0075f).toInt()
+                transfer in 35..150_000 -> (transfer * 0.0075f).toInt()
                 else -> 0
             }
         }
+
         "Mir" -> {
             when {
                 transfer > 150_000 || transfer + previos > 600_000 -> -1
-                transfer in 35.. 150_000 -> (transfer * 0.0075f).toInt()
+                transfer in 35..150_000 -> (transfer * 0.0075f).toInt()
                 else -> 0
             }
         }
+
         "VK Pay" -> {
             when {
                 transfer > 15_000 || transfer + previos > 40_000 -> -1
                 else -> 0
             }
         }
+
         else -> -2
     }
 }
